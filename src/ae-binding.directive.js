@@ -107,20 +107,13 @@ return {
         }
       }
 
-      // Convert Angular camelCase property to dash-case
-      function denormalize(str) {
-        return str.replace(/[A-Z]/g, function(c) {
-          return '-' + c.toLowerCase();
-        });
-      }
-
       for (var prop in attrMap) {
-        $element[0].addEventListener(denormalize(prop) + 'Change', applyChange);
+        $element[0].addEventListener(prop + 'Change', applyChange);
       }
 
       $scope.$on('$destroy', function() {
         for (var prop in attrMap) {
-          $element[0].removeEventListener(denormalize(prop) + 'Change', applyChange);
+          $element[0].removeEventListener(prop + 'Change', applyChange);
         }
       });
     }
